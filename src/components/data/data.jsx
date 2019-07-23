@@ -1,17 +1,25 @@
 import React from "react";
+import styled from 'styled-components'
+
+
+
+  const Ul = styled.ul`
+    list-style-type: none; `;
+
+
 
 function Data(props) {
-  return (
+return(
     <div>
       <h1>{props.name}</h1>
 
-      <h4>Information:</h4>
-      <ul>
+      <Ul>
         <li> User Name: {props.username} </li>
         <li> Email: {props.email} </li>
         <li> Phone: {props.phone} </li>
         <li> Website: {props.website} </li>
-      </ul>
+      </Ul>
+      
     </div>
   );
 }

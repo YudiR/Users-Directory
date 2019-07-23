@@ -2,6 +2,7 @@ import React from "react";
 import Name from "./components/name/name";
 import Data from "./components/data/data";
 import Title from "./components/title/title";
+import { Container, Row, Col } from "react-bootstrap";
 import "./App.css";
 class App extends React.Component {
   constructor(props) {
@@ -55,22 +56,35 @@ class App extends React.Component {
     if (this.state.data.username) {
       var ui = <Data {...this.state.data} />;
     } else {
-      ui = <Title />;
+      var title = <Title />;
     }
 
     return (
       <div>
-        {this.state.users.map((user, index) => (
-          <Name
-            key={index}
-            index={index}
-            name={user.name}
-            data={this.data}
-            delete={this.delete}
-          />
-        ))}
+        <Container>
+          <Row>
+            <Col align="center">{title}</Col>
+          </Row>
 
-        {ui}
+          <Row>{/* <Col md={{span:8, offset: 4}} >{ui}</Col> */}</Row>
+
+            <Row>
+              <Col md={4}  >
+          {this.state.users.map((user, index) => (
+                <Name
+                  key={index}
+                  index={index}
+                  name={user.name}
+                  data={this.data}
+                  delete={this.delete}
+                />
+                ))}
+              </Col>
+
+              <Col md={{span:4, offset:1}} ><br></br><br></br><br></br><br/><br/><br/><br/> {ui}</Col>
+            </Row>
+          
+        </Container>
       </div>
     );
   }
