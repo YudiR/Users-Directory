@@ -2,7 +2,10 @@ import React from "react";
 import Name from "./components/name/name";
 import Data from "./components/data/data";
 import Title from "./components/title/title";
+import Buttons from "./components/button/button";
 import { Container, Row, Col } from "react-bootstrap";
+import Edit from "./components/button/edit"
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import "./App.css";
 class App extends React.Component {
   constructor(props) {
@@ -54,37 +57,54 @@ class App extends React.Component {
 
   render() {
     if (this.state.data.username) {
-      var ui = <Data {...this.state.data} />;
+      var ui = <Data {...this.state.data} />
+      var edit = <Edit/>;
     } else {
       var title = <Title />;
     }
 
     return (
       <div>
+        <Router>
         <Container>
+       
           <Row>
             <Col align="center">{title}</Col>
+            <br/><br/><br/>
           </Row>
 
-          <Row>{/* <Col md={{span:8, offset: 4}} >{ui}</Col> */}</Row>
-
-            <Row>
-              <Col md={4}  >
-          {this.state.users.map((user, index) => (
-                <Name
-                  key={index}
-                  index={index}
-                  name={user.name}
-                  data={this.data}
-                  delete={this.delete}
-                />
-                ))}
-              </Col>
-
-              <Col md={{span:4, offset:1}} ><br></br><br></br><br></br><br/><br/><br/><br/> {ui}</Col>
-            </Row>
+          <Row>
+            <Col md={"auto"}>
+              {this.state.users.map((user, index) => (
+                <div id="parent">
+                  <Name
+                    key={index}
+                    index={index}
+                    name={user.name}
+                    data={this.data}
+                  />
+                   <Buttons key={index} index={index} delete={this.delete} />
+                  <br/>
+                </div>
+              ))}
+            </Col>
           
+                
+         
+
+            <Col md={{ span: 4, offset: 3 }}>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br /> {ui}
+                {edit}
+            </Col>
+          </Row>
         </Container>
+        </Router>
       </div>
     );
   }
